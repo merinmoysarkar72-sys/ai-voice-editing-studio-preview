@@ -84,7 +84,7 @@ def create_access_session(payload: dict, response: Response, request: Request):
     is_secure = request.url.scheme == "https"
     if supplied:
         response.set_cookie(key="aves_access", value=supplied, httponly=True, secure=is_secure,
-                            samesite="none" if cross_origin and is_secure else "lax", path="/api", max_age=43200)
+                            samesite="none" if cross_origin and is_secure else "lax", path="/api", max_age=31536000)
     return {"authenticated": True, "access_protected": bool(users or os.getenv("AVES_ACCESS_TOKEN", "").strip()), "user_id": str(user_id)}
 
 
