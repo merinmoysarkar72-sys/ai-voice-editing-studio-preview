@@ -2,8 +2,6 @@ name: Extract project source
 on:
   workflow_dispatch:
   push:
-    paths:
-      - "ai-voice-editing-studio-complete.zip"
 permissions:
   contents: write
 jobs:
