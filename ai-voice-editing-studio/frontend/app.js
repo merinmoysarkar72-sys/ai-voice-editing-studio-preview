@@ -1,5 +1,5 @@
 (() => {
-  const API = (window.VOICE_API_BASE || '').replace(/\/$/, '');
+  const API = (window.VOICE_API_BASE || 'https://ai-voice-editing-studio-backend.onrender.com').replace(/\/$/, '');
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   const state = { projects: [], current: null, pollTimer: null, recorder: null, recordChunks: [], recordStarted: 0, recordTicker: null, undo: [], redo: [], timelinePeaks: [], timelineRanges: [], timelineActive: false, timelineSplits: [], timelineSelection: null, timelineDragging: false, timelineUndo: [], timelineRedo: [], originalObjectUrl: null, finalObjectUrl: null };
