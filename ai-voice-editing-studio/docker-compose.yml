@@ -1,0 +1,21 @@
+services:
+  voice-studio:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      AVES_DATA_DIR: /data
+      HF_HOME: /data/models
+      WHISPER_MODEL: large-v3-turbo
+      WHISPER_DEVICE: cpu
+      WHISPER_COMPUTE_TYPE: int8
+      AVES_MAX_AUDIO_MB: 500
+      AVES_ACCESS_TOKEN: ${AVES_ACCESS_TOKEN:-}
+      AVES_ALLOWED_ORIGINS: ${AVES_ALLOWED_ORIGINS:-}
+    volumes:
+      - voice_studio_data:/data
+    restart: unless-stopped
+volumes:
+  voice_studio_data:

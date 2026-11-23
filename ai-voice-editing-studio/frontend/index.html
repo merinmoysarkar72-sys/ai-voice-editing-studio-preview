@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080d18" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <meta name="description" content="Script-aware voice editing, audio cleanup and voiceover production." />
+  <title>AI Voice Editing Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark"><span></span><span></span><span></span><span></span></div>
+        <div><strong>VOICE<span>STUDIO</span></strong><small>AI AUDIO WORKSPACE</small></div>
+      </div>
+      <button class="workspace-switch"><span class="workspace-dot"></span><span>Personal workspace</span><span class="chevron">⌄</span></button>
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="main-nav">
+        <button class="nav-item active" data-view="home"><span class="nav-icon">⌂</span>Overview</button>
+        <button class="nav-item" data-view="projects"><span class="nav-icon">▤</span>My projects</button>
+        <button class="nav-item" data-view="editor"><span class="nav-icon">◫</span>Audio editor</button>
+        <button class="nav-item" data-view="reports"><span class="nav-icon">▥</span>Analysis reports</button>
+      </nav>
+      <div class="nav-label second-label">PREFERENCES</div>
+      <nav class="main-nav">
+        <button class="nav-item" data-view="settings"><span class="nav-icon">⚙</span>Settings</button>
+        <button class="nav-item" data-view="about"><span class="nav-icon">ⓘ</span>About Studio</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="storage-card"><div class="storage-head"><span>Local storage</span><span id="storage-value">On device</span></div><div class="storage-track"><i></i></div><small>Files stay on this server</small></div>
+        <div class="profile"><div class="avatar">VS</div><div><strong>Studio workspace</strong><small>Private projects</small></div><span class="more">···</span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobile-menu" aria-label="Open navigation">☰</button>
+        <div class="breadcrumb"><span>Workspace</span><b>/</b><strong id="crumb-current">Overview</strong></div>
+        <div class="top-actions"><span class="system-status"><i></i><span id="system-status-text">Checking audio engine</span></span><button class="icon-button" title="Notifications">♧</button><div class="top-avatar">VS</div></div>
+      </header>
+
+      <section class="view active" id="view-home">
+        <div class="hero-row"><div><div class="eyebrow"><span class="eyebrow-line"></span>YOUR VOICE. PERFECTLY EDITED.</div><h1>Make every take<br><em>sound intentional.</em></h1><p class="hero-copy">Match your recording to the script. Find retakes, catch missing lines, clean audio and build a polished voiceover.</p></div><div class="hero-orbit"><div class="orbit-ring ring-one"></div><div class="orbit-ring ring-two"></div><div class="orbit-core"><span>◖</span><small>AI</small></div><div class="orbit-node node-a">•••</div><div class="orbit-node node-b">♪</div></div></div>
+        <div class="quick-actions"><button class="primary-btn" id="create-project"><span>＋</span> Create new project</button><button class="secondary-btn" id="open-recent">Open recent project <span>↗</span></button><div class="workflow-hint"><span class="pulse-dot"></span> Script-aware editing workflow</div></div>
+        <div class="stats-grid"><div class="stat-card"><div class="stat-label">TOTAL PROJECTS <span>↗</span></div><div class="stat-value" id="stat-projects">0</div><div class="stat-foot">Saved in this workspace</div></div><div class="stat-card"><div class="stat-label">ANALYZED RECORDINGS <span>◌</span></div><div class="stat-value" id="stat-analyzed">0</div><div class="stat-foot">Real transcription reports</div></div><div class="stat-card"><div class="stat-label">RECENT ACTIVITY <span>◷</span></div><div class="stat-value stat-word" id="stat-activity">Ready</div><div class="stat-foot">Your next edit starts here</div></div></div>
+        <div class="section-heading"><div><h2>Recent projects</h2><p>Continue where you left off.</p></div><button class="text-button" data-view="projects">View all projects <span>→</span></button></div>
+        <div class="project-grid" id="recent-projects"><div class="empty-card"><div class="empty-wave">〰</div><strong>Your workspace is clear</strong><p>Create a project to start matching your voice recording to a script.</p><button class="text-button" id="empty-create">Create your first project →</button></div></div>
+        <div class="bottom-note"><span class="shield">◇</span><div><strong>Your source recording is preserved.</strong><p>Edits are generated as a separate output. Original audio and script stay in your project.</p></div><span class="note-arrow">↗</span></div>
+      </section>
+
+      <section class="view" id="view-projects">
+        <div class="page-title"><div><div class="eyebrow">WORKSPACE LIBRARY</div><h1>My projects</h1><p>Manage scripts, recordings and editing sessions.</p></div><button class="primary-btn" id="create-project-two">＋ New project</button></div>
+        <div class="project-grid all-projects" id="all-projects"><div class="empty-card"><strong>No projects yet</strong><p>Your saved projects will appear here.</p></div></div>
+      </section>
+
+      <section class="view" id="view-editor">
+        <div class="editor-header"><div><div class="eyebrow">VOICEOVER WORKFLOW</div><h1 id="editor-title">New project</h1><p id="editor-subtitle">Add your script and recording to begin.</p></div><div class="editor-head-actions"><span class="project-status" id="project-status">DRAFT</span><button class="ghost-btn" id="delete-project">Delete project</button></div></div>
+        <div class="stepper" id="stepper"><div class="step active" data-step="1"><span>01</span><div><strong>Source</strong><small>Script + voice</small></div></div><i></i><div class="step" data-step="2"><span>02</span><div><strong>Analyze</strong><small>Match & detect</small></div></div><i></i><div class="step" data-step="3"><span>03</span><div><strong>Review</strong><small>Approve edits</small></div></div><i></i><div class="step" data-step="4"><span>04</span><div><strong>Export</strong><small>Final voiceover</small></div></div></div>
+        <div class="source-grid">
+          <article class="panel script-panel"><div class="panel-heading"><div class="panel-icon script-icon">¶</div><div><h3>Original script</h3><p>Your written script is the source of truth.</p></div><span class="required-tag">REQUIRED</span></div>
+            <div class="upload-line"><label class="upload-btn" for="script-file">↑ Upload script</label><span>TXT · PDF · DOCX</span><button class="inline-button" id="clear-script">Clear</button></div>
+            <textarea id="script-text" placeholder="Paste your complete voiceover script here…&#10;&#10;Keep your sentences in the exact order you want them spoken."></textarea>
+            <div class="field-footer"><span id="script-count">0 characters · 0 sentences</span><button class="save-script" id="save-script">Save script <span>→</span></button></div>
+            <input type="file" id="script-file" accept=".txt,.pdf,.docx" hidden />
+          </article>
+          <article class="panel audio-panel"><div class="panel-heading"><div class="panel-icon audio-icon">♫</div><div><h3>Voice recording</h3><p>Upload the original, unedited recording.</p></div><span class="required-tag">REQUIRED</span></div>
+            <label class="audio-drop" id="audio-drop" for="audio-file"><span class="upload-cloud">↑</span><strong>Drop your recording here</strong><small>or <u>browse files</u> from your device</small><em>MP3 · WAV · M4A · AAC · OGG · WEBM</em><b>Up to 500 MB</b></label>
+            <input type="file" id="audio-file" accept="audio/*,.m4a,.aac,.ogg,.webm" hidden />
+            <div class="upload-progress hidden" id="upload-progress"><div><i id="upload-progress-bar"></i></div><small id="upload-progress-text">Uploading 0%</small></div>
+            <div class="audio-loaded hidden" id="audio-loaded"><div class="audio-file-head"><div class="file-type">♫</div><div class="audio-file-info"><strong id="audio-name">recording.wav</strong><small id="audio-meta">00:00 · 0 MB</small></div><button class="inline-button" id="replace-audio">Replace</button></div><canvas id="waveform" height="74" aria-label="Audio waveform. Drag to select a range."></canvas>
+              <div class="timeline-tools"><div class="timeline-selection" id="timeline-selection">Drag across the waveform to select audio</div><div class="timeline-actions"><button class="inline-button" id="trim-selection">Trim to selection</button><button class="inline-button" id="split-playhead">Split at playhead</button><button class="inline-button danger-text" id="delete-selection">Delete selection</button><button class="inline-button" id="reset-timeline">Reset edits</button><button class="inline-button" id="replace-selection">Replace selection</button><button class="inline-button" id="timeline-undo">↶ Undo</button><button class="inline-button" id="timeline-redo">↷ Redo</button><button class="inline-button" id="working-undo">Undo replacement</button><button class="inline-button" id="working-redo">Redo replacement</button></div></div>
+              <input type="file" id="replace-segment-file" accept="audio/*,.m4a,.aac,.ogg,.webm" hidden />
+              <div class="audio-preview-pair"><div><small>ORIGINAL RECORDING</small><audio id="original-player" controls></audio></div><div><small>EDITED WORKING PREVIEW</small><audio id="working-player" controls></audio></div></div><div class="audio-file-foot"><span class="success-dot"></span> Original source saved privately <button class="inline-button danger-text" id="remove-audio">Remove</button></div></div>
+            <div class="record-row"><span>Prefer to record now?</span><button class="record-button" id="record-toggle"><i></i> Start recording</button><span class="record-time hidden" id="record-time">00:00</span></div>
+          </article>
+        </div>
+        <div class="analysis-launch panel"><div class="analysis-launch-copy"><div class="launch-symbol">✳</div><div><h3>Ready for script-aware analysis?</h3><p>Whisper will transcribe the recording and align spoken words to your script. For Bengali voiceovers, choose Bengali if auto-detection selects the wrong language. Uncertain edits stay untouched until reviewed.</p></div></div><div class="analysis-controls"><label for="speech-language">Speech language</label><select id="speech-language"><option value="auto">Auto detect</option><option value="bn">Bengali</option><option value="en">English</option></select><button class="primary-btn" id="analyze-btn" disabled>Analyze script & audio <span>→</span></button></div></div>
+        <div class="processing-panel hidden" id="processing-panel"><div class="processing-spinner"></div><div><strong id="processing-title">Preparing analysis</strong><p id="processing-copy">Transcribing the original audio and aligning it with your script.</p></div><span class="processing-state" id="processing-state">QUEUED</span></div>
+        <section class="report-section hidden" id="report-section"><div class="section-heading report-heading"><div><div class="eyebrow">SCRIPT MATCHING REPORT</div><h2>Review your recording</h2><p>Only high-confidence matched lines are selected by default.</p></div><div class="match-score"><strong id="match-score">0%</strong><small>WORD MATCH</small></div></div>
+          <div class="report-stats" id="report-stats"></div>
+          <div class="report-layout"><div class="panel sentence-panel"><div class="panel-heading"><div><h3>Script alignment</h3><p>Review each sentence before building your edit.</p></div><span class="legend"><i class="green"></i>Matched <i class="yellow"></i>Review <i class="red"></i>Missing</span></div><div class="review-tools"><span>Selection changes can be undone.</span><div><button class="inline-button" id="undo-edit">↶ Undo</button><button class="inline-button" id="redo-edit">↷ Redo</button></div></div><div id="sentence-list" class="sentence-list"></div></div>
+          <div class="panel issue-panel"><div class="panel-heading"><div><h3>Detected issues</h3><p>Unmatched speech, long pauses and silence.</p></div></div><div id="issue-list" class="issue-list"></div><div class="safety-callout"><span>ⓘ</span><p>Unmatched speech is not removed from your original file. Export uses only the sentence sections you approve.</p></div></div></div>
+          <div class="export-panel panel"><div class="export-top"><div><h3>Build your edited voiceover</h3><p>Selected matched sentences will be assembled in script order.</p></div><span class="export-selected" id="selected-count">0 selected</span></div><div class="export-controls"><label>Format<select id="export-format"><option value="mp3">MP3</option><option value="wav">WAV</option></select></label><label>Quality<select id="export-bitrate"><option value="192k">High · 192 kbps</option><option value="256k">Very high · 256 kbps</option><option value="320k">Maximum · 320 kbps</option><option value="128k">Standard · 128 kbps</option></select></label><label>Noise reduction<select id="noise-reduction"><option value="light">Light · natural</option><option value="medium">Medium</option><option value="off">Off</option></select></label><label>Pause handling<select id="pause-mode"><option value="balanced">Balanced</option><option value="natural">Natural pauses</option><option value="tight">Tight pacing</option></select></label><label>Sample rate<select id="sample-rate"><option value="44100">44.1 kHz</option><option value="48000">48 kHz</option><option value="22050">22.05 kHz</option></select></label><label>Channels<select id="audio-channels"><option value="1">Mono</option><option value="2">Stereo</option></select></label><label>Output name<input id="output-name" value="edited-voiceover" /></label></div><div class="export-bottom"><label class="check-option"><input type="checkbox" id="normalize-audio" checked /> Normalize final volume</label><button class="primary-btn" id="export-btn">Build final audio <span>→</span></button></div><div class="final-output hidden" id="final-output"><div class="final-output-info"><span class="final-check">✓</span><div><strong id="final-name">edited-voiceover.mp3</strong><small id="final-meta">Ready to download</small></div></div><audio id="final-player" controls></audio><a class="download-btn" id="download-final" href="#">↓ Download final audio</a></div></div>
+        </section>
+      </section>
+
+      <section class="view" id="view-reports"><div class="page-title"><div><div class="eyebrow">ANALYSIS HISTORY</div><h1>Analysis reports</h1><p>Open a project to review its latest script matching report.</p></div></div><div id="report-history" class="project-grid"></div></section>
+      <section class="view" id="view-settings"><div class="page-title"><div><div class="eyebrow">PREFERENCES</div><h1>Settings</h1><p>Processing options and local privacy information.</p></div></div><div class="settings-grid"><div class="panel settings-card"><h3>AI speech engine</h3><p>Multilingual faster-whisper running on the backend CPU. Bengali and English are supported by the multilingual model.</p><div class="setting-row"><span>Default model</span><strong>small · int8</strong></div><div class="setting-row"><span>Voice activity detection</span><strong>Enabled</strong></div><div class="setting-row"><span>Word timestamps</span><strong>Enabled</strong></div></div><div class="panel settings-card"><h3>Privacy & storage</h3><p>Projects are stored in the backend data directory. No third-party speech API is called by this application.</p><div class="setting-row"><span>Original audio</span><strong>Preserved</strong></div><div class="setting-row"><span>Model training</span><strong>Not used</strong></div><div class="setting-row"><span>Public file links</span><strong>Not enabled</strong></div></div></div></section>
+      <section class="view" id="view-about"><div class="about-card panel"><div class="brand-mark large"><span></span><span></span><span></span><span></span></div><div class="eyebrow">SCRIPT-BASED VOICE EDITING</div><h1>AI Voice Editing Studio</h1><p>Your Voice. Perfectly Edited.</p><p class="about-copy">A privacy-conscious voiceover workspace that compares real speech recognition results with your written script. It keeps uncertain edits reviewable and never overwrites the original recording.</p><div class="version-label">BUILD 0.1.0 · FOUNDATION RELEASE</div></div></section>
+      <footer class="app-footer"><span>AI VOICE EDITING STUDIO</span><span>Originals preserved · Edits are reviewable</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast"></div>
+  <dialog id="project-dialog" class="project-dialog"><form method="dialog" id="project-form"><div class="dialog-close-row"><span class="eyebrow">START A NEW SESSION</span><button class="inline-button" value="cancel" aria-label="Close">✕</button></div><h2>Create project</h2><p>Give your voiceover session a name.</p><label>Project name<input id="new-project-name" maxlength="100" placeholder="e.g. Documentary voiceover" value="New voiceover project" required /></label><div class="dialog-actions"><button class="secondary-btn" value="cancel">Cancel</button><button class="primary-btn" id="confirm-create" value="default">Create project →</button></div></form></dialog>
+  <script src="/app.js" defer></script>
+</body>
+</html>

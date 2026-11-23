@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: ai-voice-editing-studio
+    runtime: docker
+    plan: standard
+    region: singapore
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeploy: true
+    disk:
+      name: aves-persistent-data
+      mountPath: /data
+      sizeGB: 10
+    envVars:
+      - key: AVES_ENV
+        value: production
+      - key: AVES_DATA_DIR
+        value: /data
+      - key: AVES_MAX_AUDIO_MB
+        value: "500"
+      - key: WHISPER_MODEL
+        value: large-v3-turbo
+      - key: WHISPER_DEVICE
+        value: cpu
+      - key: WHISPER_COMPUTE_TYPE
+        value: int8
+      - key: AVES_ACCESS_TOKEN
+        sync: false

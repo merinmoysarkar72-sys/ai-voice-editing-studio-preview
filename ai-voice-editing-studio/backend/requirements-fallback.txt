@@ -1,0 +1,3 @@
+# Optional CPU-compatible fallback if faster-whisper cannot be installed.
+# OpenAI Whisper has larger PyTorch dependencies and segment-level timestamps.
+openai-whisper>=20240930
